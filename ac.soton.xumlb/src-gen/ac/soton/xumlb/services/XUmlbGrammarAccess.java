@@ -897,6 +897,25 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'end'
 		public Keyword getEndKeyword_6() { return cEndKeyword_6; }
 	}
+	public class EventBSuperTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ac.soton.xumlb.XUmlb.EventBSuperType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSubtypeGroupParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EventBSuperType eclassdiagrams::EventBSuperType:
+		//	Class | SubtypeGroup;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Class | SubtypeGroup
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Class
+		public RuleCall getClassParserRuleCall_0() { return cClassParserRuleCall_0; }
+		
+		//SubtypeGroup
+		public RuleCall getSubtypeGroupParserRuleCall_1() { return cSubtypeGroupParserRuleCall_1; }
+	}
 	public class ClassElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ac.soton.xumlb.XUmlb.Class");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -924,8 +943,8 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
 		private final Keyword cSupertypesKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
 		private final Assignment cSupertypesAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
-		private final CrossReference cSupertypesClassCrossReference_9_1_0 = (CrossReference)cSupertypesAssignment_9_1.eContents().get(0);
-		private final RuleCall cSupertypesClassQualifiedNameParserRuleCall_9_1_0_1 = (RuleCall)cSupertypesClassCrossReference_9_1_0.eContents().get(1);
+		private final CrossReference cSupertypesEventBSuperTypeCrossReference_9_1_0 = (CrossReference)cSupertypesAssignment_9_1.eContents().get(0);
+		private final RuleCall cSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1 = (RuleCall)cSupertypesEventBSuperTypeCrossReference_9_1_0.eContents().get(1);
 		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
 		private final Keyword cRefinesKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
 		private final Assignment cRefinesAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
@@ -948,15 +967,11 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cSubtypeGroupsAssignment_15_1 = (Assignment)cGroup_15.eContents().get(1);
 		private final RuleCall cSubtypeGroupsSubtypeGroupParserRuleCall_15_1_0 = (RuleCall)cSubtypeGroupsAssignment_15_1.eContents().get(0);
 		
-		////EventBSuperType returns classdiagrams::EventBSuperType:
-		////	{classdiagrams::EventBSuperType}
-		////	Class | SubtypeGroup
-		////;	
 		//Class eclassdiagrams::Class:
 		//	{eclassdiagrams::Class}
 		//	'class'
 		//	name=ID '(' dataKind=DataKind ')' ('elaborates' elaborates=[eventbcore::EventBNamed|QualifiedName])? ('selfName'
-		//	selfName=EString)? ('instances' instances=EString)? ('supertypes' supertypes+=[eclassdiagrams::Class|QualifiedName]+)?
+		//	selfName=EString)? ('instances' instances=EString)? ('supertypes' supertypes+=[eclassdiagrams::EventBSuperType]+)?
 		//	('refines' refines=[eclassdiagrams::Class|QualifiedName])? ('statemachines' 'begin' statemachines+=Statemachine+
 		//	'end')?
 		//	classAttributes+=ClassAttribute* constraints+=ClassConstraint* methods+=ClassMethod* ('subtypeGroups'
@@ -965,7 +980,7 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//{eclassdiagrams::Class} 'class' name=ID '(' dataKind=DataKind ')' ('elaborates'
 		//elaborates=[eventbcore::EventBNamed|QualifiedName])? ('selfName' selfName=EString)? ('instances' instances=EString)?
-		//('supertypes' supertypes+=[eclassdiagrams::Class|QualifiedName]+)? ('refines'
+		//('supertypes' supertypes+=[eclassdiagrams::EventBSuperType]+)? ('refines'
 		//refines=[eclassdiagrams::Class|QualifiedName])? ('statemachines' 'begin' statemachines+=Statemachine+ 'end')?
 		//classAttributes+=ClassAttribute* constraints+=ClassConstraint* methods+=ClassMethod* ('subtypeGroups'
 		//subtypeGroups+=SubtypeGroup+)?
@@ -1034,20 +1049,20 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//EString
 		public RuleCall getInstancesEStringParserRuleCall_8_1_0() { return cInstancesEStringParserRuleCall_8_1_0; }
 		
-		//('supertypes' supertypes+=[eclassdiagrams::Class|QualifiedName]+)?
+		//('supertypes' supertypes+=[eclassdiagrams::EventBSuperType]+)?
 		public Group getGroup_9() { return cGroup_9; }
 		
 		//'supertypes'
 		public Keyword getSupertypesKeyword_9_0() { return cSupertypesKeyword_9_0; }
 		
-		//supertypes+=[eclassdiagrams::Class|QualifiedName]+
+		//supertypes+=[eclassdiagrams::EventBSuperType]+
 		public Assignment getSupertypesAssignment_9_1() { return cSupertypesAssignment_9_1; }
 		
-		//[eclassdiagrams::Class|QualifiedName]
-		public CrossReference getSupertypesClassCrossReference_9_1_0() { return cSupertypesClassCrossReference_9_1_0; }
+		//[eclassdiagrams::EventBSuperType]
+		public CrossReference getSupertypesEventBSuperTypeCrossReference_9_1_0() { return cSupertypesEventBSuperTypeCrossReference_9_1_0; }
 		
-		//QualifiedName
-		public RuleCall getSupertypesClassQualifiedNameParserRuleCall_9_1_0_1() { return cSupertypesClassQualifiedNameParserRuleCall_9_1_0_1; }
+		//ID
+		public RuleCall getSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1() { return cSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1; }
 		
 		//('refines' refines=[eclassdiagrams::Class|QualifiedName])?
 		public Group getGroup_10() { return cGroup_10; }
@@ -2538,6 +2553,7 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final JunctionElements pJunction;
 	private final ForkElements pFork;
 	private final ClassdiagramElements pClassdiagram;
+	private final EventBSuperTypeElements pEventBSuperType;
 	private final ClassElements pClass;
 	private final AssociationElements pAssociation;
 	private final SubtypeGroupElements pSubtypeGroup;
@@ -2585,6 +2601,7 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pJunction = new JunctionElements();
 		this.pFork = new ForkElements();
 		this.pClassdiagram = new ClassdiagramElements();
+		this.pEventBSuperType = new EventBSuperTypeElements();
 		this.pClass = new ClassElements();
 		this.pAssociation = new AssociationElements();
 		this.pSubtypeGroup = new SubtypeGroupElements();
@@ -2834,15 +2851,21 @@ public class XUmlbGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getClassdiagramAccess().getRule();
 	}
 	
-	////EventBSuperType returns classdiagrams::EventBSuperType:
-	////	{classdiagrams::EventBSuperType}
-	////	Class | SubtypeGroup
-	////;	
+	//EventBSuperType eclassdiagrams::EventBSuperType:
+	//	Class | SubtypeGroup;
+	public EventBSuperTypeElements getEventBSuperTypeAccess() {
+		return pEventBSuperType;
+	}
+	
+	public ParserRule getEventBSuperTypeRule() {
+		return getEventBSuperTypeAccess().getRule();
+	}
+	
 	//Class eclassdiagrams::Class:
 	//	{eclassdiagrams::Class}
 	//	'class'
 	//	name=ID '(' dataKind=DataKind ')' ('elaborates' elaborates=[eventbcore::EventBNamed|QualifiedName])? ('selfName'
-	//	selfName=EString)? ('instances' instances=EString)? ('supertypes' supertypes+=[eclassdiagrams::Class|QualifiedName]+)?
+	//	selfName=EString)? ('instances' instances=EString)? ('supertypes' supertypes+=[eclassdiagrams::EventBSuperType]+)?
 	//	('refines' refines=[eclassdiagrams::Class|QualifiedName])? ('statemachines' 'begin' statemachines+=Statemachine+
 	//	'end')?
 	//	classAttributes+=ClassAttribute* constraints+=ClassConstraint* methods+=ClassMethod* ('subtypeGroups'

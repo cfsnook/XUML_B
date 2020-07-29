@@ -254,6 +254,7 @@ public class XUmlbSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     EventBSuperType returns Class
 	 *     Class returns Class
 	 *
 	 * Constraint:
@@ -263,7 +264,7 @@ public class XUmlbSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         elaborates=[EventBNamed|QualifiedName]? 
 	 *         selfName=EString? 
 	 *         instances=EString? 
-	 *         supertypes+=[Class|QualifiedName]* 
+	 *         supertypes+=[EventBSuperType|ID]* 
 	 *         refines=[Class|QualifiedName]? 
 	 *         statemachines+=Statemachine* 
 	 *         classAttributes+=ClassAttribute* 
@@ -432,6 +433,7 @@ public class XUmlbSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     EventBSuperType returns SubtypeGroup
 	 *     SubtypeGroup returns SubtypeGroup
 	 *
 	 * Constraint:

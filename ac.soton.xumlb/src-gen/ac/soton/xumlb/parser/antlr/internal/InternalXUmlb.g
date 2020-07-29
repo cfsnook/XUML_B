@@ -1569,12 +1569,9 @@ ruleClass returns [EObject current=null]
 							$current = createModelElement(grammarAccess.getClassRule());
 						}
 					}
+					otherlv_13=RULE_ID
 					{
-						newCompositeNode(grammarAccess.getClassAccess().getSupertypesClassCrossReference_9_1_0());
-					}
-					ruleQualifiedName
-					{
-						afterParserOrEnumRuleCall();
+						newLeafNode(otherlv_13, grammarAccess.getClassAccess().getSupertypesEventBSuperTypeCrossReference_9_1_0());
 					}
 				)
 			)+
