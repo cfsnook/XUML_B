@@ -36,6 +36,8 @@ import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.EventBSuperType;
+
 import org.eclipse.xtext.EcoreUtil2;
 import ac.soton.eventb.emf.diagrams.UMLB;
 import ac.soton.eventb.statemachines.AbstractNode;
@@ -197,7 +199,13 @@ public class XUmlbScopeProvider extends AbstractXUmlbScopeProvider {
  			 EObject eContainer = cs.eContainer();
  			 if (eContainer instanceof Classdiagram) {
  				Classdiagram cd = (Classdiagram) eContainer;
- 				return Scopes.scopeFor(cd.getClasses());
+ 			    EList<Class> classes = cd.getClasses();
+ 			    List <EventBSuperType> superTypes = new ArrayList<EventBSuperType>() ;
+ 			    superTypes.addAll(classes);
+ 			    for(Class c : classes) {
+ 			    	 superTypes.addAll(c.getSubtypeGroups());
+ 			    }
+ 				return Scopes.scopeFor(superTypes);
  			 }
  		 }
  		 
