@@ -122,19 +122,19 @@ Classdiagram returns eclassdiagrams::Classdiagram:
 	'end'
 ;
 
-//EventBSuperType returns classdiagrams::EventBSuperType:
-//	{classdiagrams::EventBSuperType}
-//	Class | SubtypeGroup
-//;	
+EventBSuperType returns eclassdiagrams::EventBSuperType:
+	 Class | SubtypeGroup
+;	
 
 Class returns eclassdiagrams::Class:
 	{eclassdiagrams::Class}
 	'class' 
-	     name = ID '(' dataKind = DataKind ')'
+	    name = ID '(' dataKind = DataKind ')'
 	    ('elaborates' elaborates=[eventbcore::EventBNamed|QualifiedName])?
 		('selfName' selfName = EString)?
 		('instances' instances=EString)?
-	    ('supertypes' supertypes+=[eclassdiagrams::Class|QualifiedName]+)?
+//	    ('supertypes' supertypes+=[eclassdiagrams::Class|QualifiedName]+)?
+        ('supertypes' supertypes+=[eclassdiagrams::EventBSuperType]+)?
 		('refines' refines=[eclassdiagrams::Class|QualifiedName])?
 		('statemachines' 'begin' statemachines+=Statemachine+ 'end')?
 		(  classAttributes+=ClassAttribute* )
