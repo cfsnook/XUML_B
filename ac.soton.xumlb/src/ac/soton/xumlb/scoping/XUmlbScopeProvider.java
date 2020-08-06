@@ -34,6 +34,7 @@ import org.rodinp.core.RodinDBException;
 
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
+import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.EventBSuperType;
@@ -41,6 +42,7 @@ import ac.soton.eventb.classdiagrams.EventBSuperType;
 import org.eclipse.xtext.EcoreUtil2;
 import ac.soton.eventb.emf.diagrams.UMLB;
 import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
@@ -149,7 +151,35 @@ public class XUmlbScopeProvider extends AbstractXUmlbScopeProvider {
 					 return Scopes.scopeFor(instances);
 				}			
 			}
-        
+		 
+	 		// scoping for statemachine refines
+ 		 if (context instanceof Statemachine && reference == StatemachinesPackage.Literals.STATEMACHINE__REFINES) {
+			EObject rootCont =   EcoreUtil2.getRootContainer(context, true);
+			if (rootCont instanceof UMLB) {
+				 UMLB umlbRefines = ((UMLB) rootCont).getRefines();
+				 if(umlbRefines != null) {
+					   EList<Diagram> diagrams = umlbRefines.getDiagrams();
+					   List <Statemachine> smDiagrams = new ArrayList <Statemachine>();
+					   for(Diagram d : diagrams) {
+						   if (d instanceof Statemachine)
+							   smDiagrams.add((Statemachine) d);
+					   }
+					   return Scopes.scopeFor(smDiagrams);
+				 }
+			}  
+		} 
+ 		 
+   		// scoping for State refines
+  		 if (context instanceof State && reference ==StatemachinesPackage.Literals.STATE__REFINES) {
+  			 EObject eContainer = context.eContainer();
+  			 if (eContainer instanceof Statemachine) {
+ 				 Statemachine smRefines = ((Statemachine) eContainer).getRefines();
+ 				 if(smRefines != null) {
+ 					   List<State> states = EcoreUtil2.<State>getAllContentsOfType((EObject)smRefines, State.class);
+ 					   return Scopes.scopeFor(states);
+ 				 }
+ 			}  
+ 		} 
  		/********************************************
  		 * Classdiagram scoping
  		 ********************************************/
@@ -229,6 +259,42 @@ public class XUmlbScopeProvider extends AbstractXUmlbScopeProvider {
 				 }
 			}  
 		} 
+ 		// scoping for classdiagram refines
+ 		 if (context instanceof Classdiagram && reference == ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES) {
+			EObject rootCont =   EcoreUtil2.getRootContainer(context, true);
+			if (rootCont instanceof UMLB) {
+				 UMLB umlbRefines = ((UMLB) rootCont).getRefines();
+				 if(umlbRefines != null) {
+					   EList<Diagram> diagrams = umlbRefines.getDiagrams();
+//					   List<Classdiagram> classdiagrams = EcoreUtil2.<Classdiagram>getAllContentsOfType((EObject)diagrams, Classdiagram.class);
+					   List <Classdiagram> classdiagrams = new ArrayList <Classdiagram>();
+					   for(Diagram d : diagrams) {
+						   if (d instanceof Classdiagram)
+							   classdiagrams.add((Classdiagram) d);
+					   }
+					   return Scopes.scopeFor(classdiagrams);
+				 }
+			}  
+		} 
+ 		 
+  		// scoping for Class refines
+ 		 if (context instanceof Class && reference == ClassdiagramsPackage.Literals.CLASS__REFINES) {
+ 			 EObject eContainer = context.eContainer();
+ 			 if (eContainer instanceof Classdiagram) {
+				 Classdiagram cdRefines = ((Classdiagram) eContainer).getRefines();
+				 if(cdRefines != null) {
+//					   EList<Diagram> diagrams = umlbRefines.getDiagrams();
+					   List<Class> classes = EcoreUtil2.<Class>getAllContentsOfType((EObject)cdRefines, Class.class);
+//					   List <Classdiagram> classdiagrams = new ArrayList <Classdiagram>();
+//					   for(Diagram d : diagrams) {
+//						   if (d instanceof Classdiagram)
+//							   classdiagrams.add((Classdiagram) d);
+//					   }
+					   return Scopes.scopeFor(classes);
+				 }
+			}  
+		} 
+ 		 
  		return super.getScope(context, reference);
 	}
 	

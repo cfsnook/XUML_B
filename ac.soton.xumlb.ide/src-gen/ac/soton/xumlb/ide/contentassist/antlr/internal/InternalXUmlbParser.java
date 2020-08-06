@@ -27097,33 +27097,29 @@ public class InternalXUmlbParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Class__SupertypesAssignment_9_1"
-    // InternalXUmlb.g:8645:1: rule__Class__SupertypesAssignment_9_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalXUmlb.g:8645:1: rule__Class__SupertypesAssignment_9_1 : ( ( RULE_ID ) ) ;
     public final void rule__Class__SupertypesAssignment_9_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalXUmlb.g:8649:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalXUmlb.g:8650:2: ( ( ruleQualifiedName ) )
+            // InternalXUmlb.g:8649:1: ( ( ( RULE_ID ) ) )
+            // InternalXUmlb.g:8650:2: ( ( RULE_ID ) )
             {
-            // InternalXUmlb.g:8650:2: ( ( ruleQualifiedName ) )
-            // InternalXUmlb.g:8651:3: ( ruleQualifiedName )
+            // InternalXUmlb.g:8650:2: ( ( RULE_ID ) )
+            // InternalXUmlb.g:8651:3: ( RULE_ID )
             {
-             before(grammarAccess.getClassAccess().getSupertypesClassCrossReference_9_1_0()); 
-            // InternalXUmlb.g:8652:3: ( ruleQualifiedName )
-            // InternalXUmlb.g:8653:4: ruleQualifiedName
+             before(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeCrossReference_9_1_0()); 
+            // InternalXUmlb.g:8652:3: ( RULE_ID )
+            // InternalXUmlb.g:8653:4: RULE_ID
             {
-             before(grammarAccess.getClassAccess().getSupertypesClassQualifiedNameParserRuleCall_9_1_0_1()); 
-            pushFollow(FOLLOW_2);
-            ruleQualifiedName();
-
-            state._fsp--;
-
-             after(grammarAccess.getClassAccess().getSupertypesClassQualifiedNameParserRuleCall_9_1_0_1()); 
+             before(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1()); 
+            match(input,RULE_ID,FOLLOW_2); 
+             after(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1()); 
 
             }
 
-             after(grammarAccess.getClassAccess().getSupertypesClassCrossReference_9_1_0()); 
+             after(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeCrossReference_9_1_0()); 
 
             }
 

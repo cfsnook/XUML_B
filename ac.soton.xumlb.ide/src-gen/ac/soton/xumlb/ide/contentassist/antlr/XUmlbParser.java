@@ -35,6 +35,7 @@ public class XUmlbParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAbstractNodeAccess().getAlternatives(), "rule__AbstractNode__Alternatives");
 			builder.put(grammarAccess.getXComplexTypeAccess().getAlternatives(), "rule__XComplexType__Alternatives");
 			builder.put(grammarAccess.getEVENT_B_BUILDIN_TYPEAccess().getAlternatives(), "rule__EVENT_B_BUILDIN_TYPE__Alternatives");
+			builder.put(grammarAccess.getEventBSuperTypeAccess().getAlternatives(), "rule__EventBSuperType__Alternatives");
 			builder.put(grammarAccess.getEStringAccess().getAlternatives(), "rule__EString__Alternatives");
 			builder.put(grammarAccess.getXFormulaAccess().getAlternatives(), "rule__XFormula__Alternatives");
 			builder.put(grammarAccess.getEVENTB_IDENTIFIER_KEYWORDAccess().getAlternatives(), "rule__EVENTB_IDENTIFIER_KEYWORD__Alternatives");

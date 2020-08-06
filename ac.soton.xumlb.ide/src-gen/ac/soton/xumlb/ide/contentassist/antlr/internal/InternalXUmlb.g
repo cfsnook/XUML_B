@@ -8648,13 +8648,13 @@ rule__Class__SupertypesAssignment_9_1
 	}
 :
 	(
-		{ before(grammarAccess.getClassAccess().getSupertypesClassCrossReference_9_1_0()); }
+		{ before(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeCrossReference_9_1_0()); }
 		(
-			{ before(grammarAccess.getClassAccess().getSupertypesClassQualifiedNameParserRuleCall_9_1_0_1()); }
-			ruleQualifiedName
-			{ after(grammarAccess.getClassAccess().getSupertypesClassQualifiedNameParserRuleCall_9_1_0_1()); }
+			{ before(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1()); }
+			RULE_ID
+			{ after(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeIDTerminalRuleCall_9_1_0_1()); }
 		)
-		{ after(grammarAccess.getClassAccess().getSupertypesClassCrossReference_9_1_0()); }
+		{ after(grammarAccess.getClassAccess().getSupertypesEventBSuperTypeCrossReference_9_1_0()); }
 	)
 ;
 finally {
