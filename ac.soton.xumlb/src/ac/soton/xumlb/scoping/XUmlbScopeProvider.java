@@ -10,11 +10,23 @@
  *******************************************************************************/
 package ac.soton.xumlb.scoping;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourceAttributes;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -25,10 +37,12 @@ import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.EventBObject;
+import org.eventb.emf.core.Project;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.persistence.EMFRodinDB;
+import org.eventb.emf.persistence.ProjectResource;
 import org.rodinp.core.IRodinProject;
 import org.rodinp.core.RodinDBException;
 
@@ -53,7 +67,7 @@ import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
-
+import com.google.common.base.Objects;
 import java.util.List;
 /**
  * <p>
@@ -104,6 +118,15 @@ public class XUmlbScopeProvider extends AbstractXUmlbScopeProvider {
 				e.printStackTrace();
 			}	 
 		    
+		}
+		
+		if(context instanceof UMLB && reference== DiagramsPackage.Literals.UMLB__REFINES) {
+
+			UMLB umlb = (UMLB) context;
+		    List<UMLB> umlbFiles = getUMLBFiles(umlb);
+		    return Scopes.scopeFor(umlbFiles);
+		     
+		   
 		}
 		/********************************************
 		 * Statemachine scoping
@@ -355,4 +378,74 @@ public class XUmlbScopeProvider extends AbstractXUmlbScopeProvider {
 			 }
 		return list;
 	}
+	
+	
+	 private IProject getProject(Resource resource) {
+		 IFile file = WorkspaceSynchronizer.getFile(resource);
+		 IProject project = file.getProject();
+		 return project;
+	}
+	 
+	 // return all UMLB files with extension umlb umlbx as a list of UMLB diagrams
+	 private List<UMLB> getUMLBFiles(UMLB umlb) {
+		
+		    List<UMLB> list =  new ArrayList<UMLB>() ;
+			Resource res = umlb.eResource();
+			ResourceSet resSet = res.getResourceSet();
+
+
+			IProject project = getProject(res);
+		   
+			try {
+				IResource[] members =  project.members(); // getting all files
+				for(IResource member: members) {
+				
+					if (member instanceof IFile) {
+						IFile file = (IFile) member;
+						String fileExtension = file.getFileExtension();
+						if (Objects.equal(fileExtension, "umlb") || Objects.equal(fileExtension, "umlbx")) {
+							 URI umlbURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+							 Resource umlbResource = loadResource(umlbURI, resSet);
+							 UMLB umlbDiag = (UMLB) umlbResource.getContents().get(0); 
+							 list.add((UMLB) umlbDiag);
+						}
+				}
+			    		
+			}
+			
+				
+			} catch (CoreException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+	
+			return list;
+		}
+		
+			/**
+			 * THESE METHODS WERE COPIED FROM EMFRodinDB
+			 */
+
+		   private Resource loadResource(URI fileURI, ResourceSet resourceSet) {
+				 Resource resource = resourceSet.getResource(fileURI, false); //n.b. do not load until notifications disabled
+				if (resource == null) {
+					resource = resourceSet.createResource(fileURI);
+				}
+				// Try to load the resource
+				if (!resource.isLoaded()) {
+					boolean deliver = resource.eDeliver();
+					resource.eSetDeliver(false); // turn off notifications while loading
+					try {
+						resource.load(Collections.emptyMap());
+						// TODO throw exception instead (break API)
+					} catch (IOException e) {
+						return null;
+					} finally {
+						resource.eSetDeliver(deliver);
+					}
+				}
+				return resource;
+			}
+			
 }

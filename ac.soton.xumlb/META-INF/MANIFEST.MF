@@ -33,5 +33,7 @@ Export-Package: ac.soton.xumlb,
  ac.soton.xumlb.serializer
 Import-Package: ch.ethz.eventb.utils,
  org.apache.log4j,
+ org.eclipse.core.resources,
+ org.eclipse.emf.workspace.util,
  org.eventb.core,
  org.eventb.emf.persistence
