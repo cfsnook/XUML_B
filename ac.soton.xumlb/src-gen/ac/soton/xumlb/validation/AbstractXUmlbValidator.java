@@ -16,7 +16,7 @@ public abstract class AbstractXUmlbValidator extends AbstractDeclarativeValidato
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://soton.ac.uk/models/eventb/diagrams/2020"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://soton.ac.uk/models/eventb/statemachines/2014"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://soton.ac.uk/models/eventb/coreextension/2014"));
-		result.add(EPackage.Registry.INSTANCE.getEPackage("http://soton.ac.uk/models/eventb/classdiagrams/2019"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("http://soton.ac.uk/models/eventb/classdiagrams/2020"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://emf.eventb.org/models/core/machine/2014"));
 		return result;
 	}
