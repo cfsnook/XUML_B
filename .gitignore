@@ -1,0 +1,4 @@
+*.java._trace
+*.xtendbin
+.DS_Store
+target
